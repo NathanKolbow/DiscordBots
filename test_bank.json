@@ -1,10 +1,12 @@
 [
 	{
-		"text" : "In love, one and one are one.",
+		"title"  : "Quote",
+		"text"   : "In love, one and one are one.",
 		"credit" : "Jean-Paul Sartre (1905-1980)"
 	},
 	{
-		"text" : "I told the doctor I broke my leg in two places. He told me to quit going to those places.",
+		"title"  : "Quote",
+		"text"   : "I told the doctor I broke my leg in two places. He told me to quit going to those places.",
 		"credit" : "Henny Youngman (1906-1998)"
 	}
 ]
