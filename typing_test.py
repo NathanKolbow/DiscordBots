@@ -1,4 +1,5 @@
 import discord
+import sched, asyncio
 from time import time
 import Levenshtein as lev
 import json
@@ -9,6 +10,8 @@ CURR_TEST = 0
 TEST_BANK = None
 RUNNING_TESTS = {}
 
+SCHEDULER = sched.scheduler()
+
 class Client(discord.Client):
     async def on_ready(self):
         global TEST_BANK
@@ -16,6 +19,7 @@ class Client(discord.Client):
             TEST_BANK = json.loads(f.read())
     
         print('Logged on as', self.user)
+        await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="for productivity dips"))
         
         # Uncomment the following line to clear the given channel's messages when the bot logs on
         # await client.get_channel(AUTHORIZED_CHANNELS[0]).purge()
@@ -24,6 +28,7 @@ class Client(discord.Client):
         global CURR_TEST
         global TEST_BANK
         global RUNNING_TESTS
+        global SCHEDULER
         
         # don't respond to ourselves
         if message.author == self.user:
@@ -39,22 +44,34 @@ class Client(discord.Client):
         if message.content == 't!test':
             await message.delete()
             test = TEST_BANK[CURR_TEST]
-            embed = discord.Embed(title=test['title'] + ' by ' + test['credit'], description=test['text'], color=0xff0000)
-            # embed.add_field(name="", value=message.author, inline=True)
+            embed = discord.Embed(title=test['title'] + ' by ' + test['credit'], description="Get Ready... 3", color=0xff0000)
+            
+            proper_embed = discord.Embed(title=test['title'] + ' by ' + test['credit'], description=test['text'], color=0xffff00)
             msg = await message.channel.send(content=message.author.mention, embed=embed)
             
+            await start_test(test, msg, proper_embed, message.author)
             RUNNING_TESTS[message.author] = {
-                'test' : TEST_BANK[CURR_TEST],
+                'test' : test,
                 'start': time(),
                 'msg'  : msg,
-                'embed': embed
+                'embed': proper_embed
             }
+            
             CURR_TEST = (CURR_TEST + 1) % len(TEST_BANK)
         elif message.content == 't!info':
             await message.delete()
             embed = discord.Embed(title='t!info', color=0xffb6c1, description='I am a bot that provides typing tests via the `t!test` command. WPM (words per minute) is calculated with the standard 1 word = 5 characters typed (as opposed to the actual number of words typed in a given passage) and accuracy is calculated via an adjusted [Levenshtein distance](https://en.wikipedia.org/wiki/Levenshtein_distance).')
             embed.set_thumbnail(url=self.user.avatar_url)
             await message.channel.send(content=message.author.mention, embed=embed)
+
+
+async def start_test(test, msg, proper_embed, author):
+    await asyncio.sleep(1)
+    await msg.edit(embed=discord.Embed(title=test['title'] + ' by ' + test['credit'], description="Get Ready... 2", color=0xff0000))
+    await asyncio.sleep(1)
+    await msg.edit(embed=discord.Embed(title=test['title'] + ' by ' + test['credit'], description="Get Ready... 1", color=0xff0000))
+    await asyncio.sleep(1)
+    await msg.edit(embed=proper_embed)
 
 
 # Returns speed, acc for user using stored data in RUNNING_TESTS

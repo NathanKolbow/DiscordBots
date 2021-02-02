@@ -24,6 +24,7 @@ class Client(discord.Client):
         global ENFORCED_ROLE
 
         print('Logged on as', self.user)
+        await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="intently"))
         channel = client.get_channel(CHANNEL_ID)
         await channel.purge(limit=5, check=is_me)
         
