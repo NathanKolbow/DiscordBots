@@ -19,7 +19,7 @@ class Client(discord.Client):
             TEST_BANK = json.loads(f.read())
     
         print('Logged on as', self.user)
-        await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="for productivity dips"))
+        await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="for performance dips"))
         
         # Uncomment the following line to clear the given channel's messages when the bot logs on
         # await client.get_channel(AUTHORIZED_CHANNELS[0]).purge()
