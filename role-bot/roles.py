@@ -64,7 +64,7 @@ def is_me(m):
 
 
 client = Client()
-with open('roles.secret', 'r') as f:
+with open('bot.secret', 'r') as f:
     secret = f.read()
 
 client.run(secret)
