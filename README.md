@@ -2,7 +2,7 @@
 ### Typing Bot
 This bot takes a pre-configured bank of passages (found in test_bank.json) and allows users to take a simple typing test using the command `t!test` (this command must be sent to any of a list of pre-configured channels.)  An example of the bot working can be seen below.
 
-![Typing Bot](https://i.imgur.com/v92tgKN.gif)
+![Typing Bot](https://i.imgur.com/r3bLzJb.gif)
 
 ### Role Bot
 This bot is configured with a preset list of roles and Discord message reactions to go along with each role.  When the bot is run, it sends a message to a pre-configured channel in your Discord server that allows users to assign themselves roles by reaction to this message.  Below is an example of what the message looks like when the bot is run.  When the bot is started subsequent times, it will delete its old message and resend the message again.
