@@ -10,4 +10,7 @@ This bot is configured with a preset list of roles and Discord message reactions
 ![Role Bot](https://i.imgur.com/becQGTN.png)
 
 # Organization
-Each of the bots is given its own folder, a single master `.py` file to contain the entirety of its code, and its own `bot.secret` file containing the bot's secret token.  It would not be difficult to create one general purpose bot that amalgamates the functionality of each individual bot, but I prefer this method of organization (I also like having a lot of different bots in my Discord test server.)
+Each of the bots is given its own folder, a single master `.py` file to contain the entirety of its code, and its own `bot.secret` file containing the bot's secret token.  It would not be difficult to create one general purpose bot that amalgamates the functionality of each individual bot, but I prefer this method of organization (I also like having a lot of different bots in my Discord test server.)  This organizational format also makes life much easier for anyone looking to learn from any single bot's source code.
+
+# Credit
+As per the `LICENSE` all of the code in this repo is free to use for any purpose without promise of any warranty or liability from myself.  I only ask that if you do adapt the source code from any of these bots that you credit me wherever you feel appropriate.
